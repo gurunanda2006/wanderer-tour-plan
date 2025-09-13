@@ -78,7 +78,7 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Features Section */}
-      <section className="relative py-8 px-2 bg-card overflow-hidden transition-all duration-500 hover:bg-card/80 group">
+      <section className="relative py-8 px-2 overflow-hidden transition-all duration-500 hover:bg-card/80 group bg-neutral-700">
         <WeaveBackground />
         <div className="container mx-auto max-w-6xl relative z-10 opacity-90">
           <div className="text-center mb-8">
