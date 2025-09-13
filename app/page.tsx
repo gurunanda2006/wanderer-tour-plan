@@ -78,24 +78,27 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Features Section */}
-      <section className="relative py-16 px-4 bg-card overflow-hidden">
+      <section className="relative py-8 px-2 bg-card overflow-hidden transition-all duration-500 hover:bg-card/80 group">
         <WeaveBackground />
         <div className="container mx-auto max-w-6xl relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance group-hover:text-primary transition-colors duration-300">
               Everything You Need for the Perfect Trip
             </h2>
-            <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto group-hover:text-foreground transition-colors duration-300">
               From AI-powered planning to AR experiences, we've got all the tools to make your Telangana journey
               unforgettable
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((feature) => (
-              <Card key={feature.title} className="group hover:shadow-lg transition-all duration-300 border-border/50">
+              <Card
+                key={feature.title}
+                className="group/card hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/30 hover:bg-card/90"
+              >
                 <CardHeader>
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover/card:bg-primary/20 transition-colors">
                     <feature.icon className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
@@ -105,7 +108,7 @@ export default function HomePage() {
                   <Link href={feature.href}>
                     <Button
                       variant="outline"
-                      className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors bg-transparent"
+                      className="w-full group-hover/card:bg-primary group-hover/card:text-primary-foreground transition-colors bg-transparent"
                     >
                       Explore Feature
                     </Button>
@@ -118,32 +121,34 @@ export default function HomePage() {
       </section>
 
       {/* Popular Destinations */}
-      <section className="relative py-16 px-4 overflow-hidden">
+      <section className="relative py-8 px-2 overflow-hidden transition-all duration-500 hover:bg-muted/30 group">
         <WeaveBackground />
         <div className="container mx-auto max-w-6xl relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Popular Destinations</h2>
-            <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance group-hover:text-primary transition-colors duration-300">
+              Popular Destinations
+            </h2>
+            <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto group-hover:text-foreground transition-colors duration-300">
               Discover the most visited attractions in Telangana, each with its own unique story and cultural
               significance
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {popularDestinations.map((destination) => (
               <Card
                 key={destination.name}
-                className="group overflow-hidden hover:shadow-xl transition-all duration-300"
+                className="group/card overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src={destination.image || "/placeholder.svg"}
                     alt={destination.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover group-hover/card:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-2">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover/card:from-black/90 group-hover/card:via-black/40 transition-all duration-300" />
+                  <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-2 group-hover/card:bg-black/80 transition-colors duration-300">
                     <h3 className="font-bold text-lg text-white">{destination.name}</h3>
                     <p className="text-sm text-gray-200">{destination.location}</p>
                   </div>
@@ -161,16 +166,18 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-16 px-4 hero-gradient overflow-hidden">
+      <section className="relative py-8 px-2 hero-gradient overflow-hidden transition-all duration-500 hover:brightness-90 group">
         <WeaveBackground />
         <div className="container mx-auto max-w-4xl text-center text-white relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">Ready to Start Your Adventure?</h2>
-          <p className="text-xl mb-8 text-gray-200 text-pretty">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance group-hover:drop-shadow-lg transition-all duration-300">
+            Ready to Start Your Adventure?
+          </h2>
+          <p className="text-xl mb-8 text-gray-200 text-pretty group-hover:text-white transition-colors duration-300">
             Join thousands of travelers who have discovered the magic of Telangana with Wanderer
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/plan-trip">
-              <Button size="lg" variant="secondary" className="px-8">
+              <Button size="lg" variant="secondary" className="px-8 hover:scale-105 transition-transform duration-300">
                 Plan Your Trip Now
               </Button>
             </Link>
@@ -178,7 +185,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="px-8 bg-white/10 border-white/30 text-white hover:bg-white/20"
+                className="px-8 bg-white/10 border-white/30 text-white hover:bg-white/20 hover:scale-105 transition-all duration-300"
               >
                 Download AR Guide
               </Button>

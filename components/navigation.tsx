@@ -65,7 +65,7 @@ export function Navigation() {
                 {navItems.map((item) => (
                   <NavigationMenuItem key={item.href}>
                     <Link href={item.href} legacyBehavior passHref>
-                      <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-5 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                      <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center px-5 py-2 text-sm font-medium transition-all duration-300 hover:text-primary hover:scale-105 hover:bg-primary/5 focus:text-primary focus:outline-none focus:ring-2 focus:ring-primary/20 active:text-primary active:bg-primary/10">
                         {item.name}
                       </NavigationMenuLink>
                     </Link>
@@ -80,7 +80,7 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-primary hover:bg-primary/10"
+                className="text-primary hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary active:bg-primary/20 transition-all duration-300 hover:scale-110"
                 onClick={() => setIsQRScannerOpen(true)}
               >
                 <QrCode className="h-5 w-5" />
@@ -89,7 +89,11 @@ export function Navigation() {
               {/* Language Selector */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="gap-2 hover:bg-primary/10">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="gap-2 hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary active:bg-primary/20 transition-all duration-300 hover:scale-105"
+                  >
                     <Globe className="h-4 w-4" />
                     <span className="hidden sm:inline">
                       {currentLanguage.flag} {currentLanguage.name}
@@ -99,7 +103,11 @@ export function Navigation() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   {languages.map((lang) => (
-                    <DropdownMenuItem key={lang.code} onClick={() => setLanguage(lang.code)} className="gap-2">
+                    <DropdownMenuItem
+                      key={lang.code}
+                      onClick={() => setLanguage(lang.code)}
+                      className="gap-2 hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+                    >
                       <span>{lang.flag}</span>
                       <span>{lang.name}</span>
                     </DropdownMenuItem>
@@ -110,7 +118,11 @@ export function Navigation() {
               {/* Mobile Menu */}
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="md:hidden">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+                  >
                     <Menu className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
@@ -130,7 +142,7 @@ export function Navigation() {
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="flex items-center py-2 text-lg hover:text-primary transition-colors"
+                        className="flex items-center py-2 text-lg hover:text-primary focus:text-primary active:text-primary transition-colors"
                       >
                         {item.name}
                       </Link>
