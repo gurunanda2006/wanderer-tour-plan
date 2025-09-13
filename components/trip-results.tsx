@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { MapPin, Clock, IndianRupee, Utensils, Camera, Star, Navigation } from "lucide-react"
+import { MapPin, Clock, IndianRupee, Utensils, Camera, Star, Navigation, FileText } from "lucide-react"
 import Image from "next/image"
 
 interface TripResultsProps {
@@ -107,6 +107,24 @@ export function TripResults({ tripData }: TripResultsProps) {
 
   return (
     <div className="space-y-6 mt-8">
+      {/* AI-generated trip plan section if available */}
+      {tripData.aiTripPlan && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-primary" />
+              AI-Generated Trip Plan
+            </CardTitle>
+            <CardDescription>Personalized itinerary created by our AI travel assistant</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="prose prose-sm max-w-none">
+              <div className="whitespace-pre-wrap text-sm leading-relaxed">{tripData.aiTripPlan}</div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Trip Summary */}
       <Card>
         <CardHeader>

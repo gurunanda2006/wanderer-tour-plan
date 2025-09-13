@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
-import { MapPin, Clock, Users, IndianRupee, Sparkles } from "lucide-react"
+import { MapPin, Clock, Users, IndianRupee, Sparkles, Loader2 } from "lucide-react"
 
 interface TripPlannerFormProps {
   onPlanTrip: (data: any) => void
@@ -25,6 +25,7 @@ export function TripPlannerForm({ onPlanTrip }: TripPlannerFormProps) {
     durationType: "days",
     preferences: "",
   })
+  const [isGenerating, setIsGenerating] = useState(false)
 
   const destinations = [
     "Hyderabad",
@@ -39,9 +40,32 @@ export function TripPlannerForm({ onPlanTrip }: TripPlannerFormProps) {
     "Adilabad",
   ]
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    onPlanTrip(formData)
+    setIsGenerating(true)
+
+    try {
+      const response = await fetch("/api/generate-trip", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to generate trip plan")
+      }
+
+      const data = await response.json()
+      onPlanTrip({ ...formData, aiTripPlan: data.tripPlan })
+    } catch (error) {
+      console.error("Trip generation error:", error)
+      // Fallback to basic trip data if AI fails
+      onPlanTrip(formData)
+    } finally {
+      setIsGenerating(false)
+    }
   }
 
   const handleInputChange = (field: string, value: any) => {
@@ -150,9 +174,18 @@ export function TripPlannerForm({ onPlanTrip }: TripPlannerFormProps) {
             />
           </div>
 
-          <Button type="submit" className="w-full" size="lg">
-            <Sparkles className="h-4 w-4 mr-2" />
-            Generate Trip Plan
+          <Button type="submit" className="w-full" size="lg" disabled={isGenerating}>
+            {isGenerating ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                Generating Trip Plan...
+              </>
+            ) : (
+              <>
+                <Sparkles className="h-4 w-4 mr-2" />
+                Generate Trip Plan
+              </>
+            )}
           </Button>
         </form>
       </CardContent>

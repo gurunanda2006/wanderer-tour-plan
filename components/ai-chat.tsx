@@ -34,20 +34,6 @@ export function AIChat({ isVisible }: AIChatProps) {
   const [isLoading, setIsLoading] = useState(false)
   const scrollAreaRef = useRef<HTMLDivElement>(null)
 
-  // Dummy responses for demo (will be replaced with OpenRouter API)
-  const dummyResponses = {
-    "what do you mean by tourism":
-      "Tourism refers to the activity of traveling to and staying in places outside your usual environment for leisure, business, or other purposes. In Telangana, tourism showcases our rich cultural heritage, ancient temples, historic forts, and natural beauty.",
-    "best places to visit":
-      "Some must-visit places in Telangana include Charminar and Golconda Fort in Hyderabad, the ancient Warangal Fort, the sacred Srisailam Temple, and the beautiful Bhadrachalam Temple. Each offers unique historical and cultural experiences.",
-    "food recommendations":
-      "Don't miss trying authentic Hyderabadi Biryani, Haleem, Qubani ka Meetha, and traditional Telangana dishes like Sarva Pindi and Jonna Rotte. Paradise and Bawarchi are famous restaurants for biryani.",
-    "budget travel tips":
-      "For budget travel in Telangana: Use public transport, stay in government guest houses, eat at local dhabas, visit free temples and monuments, and travel during off-season for better deals.",
-    default:
-      "That's an interesting question! Based on my knowledge of Telangana tourism, I'd recommend exploring our heritage sites, trying local cuisine, and experiencing the warm hospitality. Is there a specific aspect of your trip you'd like help with?",
-  }
-
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return
 
@@ -59,32 +45,48 @@ export function AIChat({ isVisible }: AIChatProps) {
     }
 
     setMessages((prev) => [...prev, userMessage])
+    const currentMessage = inputMessage
     setInputMessage("")
     setIsLoading(true)
 
-    // Simulate API call delay
-    setTimeout(() => {
-      const lowerInput = inputMessage.toLowerCase()
-      let response = dummyResponses.default
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: currentMessage,
+          context: "telangana_tourism",
+        }),
+      })
 
-      // Simple keyword matching for demo
-      for (const [key, value] of Object.entries(dummyResponses)) {
-        if (lowerInput.includes(key)) {
-          response = value
-          break
-        }
+      if (!response.ok) {
+        throw new Error("Failed to get response")
       }
+
+      const data = await response.json()
 
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: response,
+        content: data.message || "I apologize, but I'm having trouble responding right now. Please try again.",
         sender: "ai",
         timestamp: new Date(),
       }
 
       setMessages((prev) => [...prev, aiMessage])
+    } catch (error) {
+      console.error("Chat error:", error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.",
+        sender: "ai",
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, errorMessage])
+    } finally {
       setIsLoading(false)
-    }, 1000)
+    }
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -108,11 +110,12 @@ export function AIChat({ isVisible }: AIChatProps) {
             <MessageCircle className="h-5 w-5 text-primary" />
             AI Travel Assistant
           </CardTitle>
-          <CardDescription>Plan your trip and get instant answers about Telangana tourism</CardDescription>
+          <CardDescription>Ask me anything about your Telangana trip</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground text-center py-8">
-            Start planning your trip to activate the AI chat assistant
+            Hello! I'm your AI travel assistant. I can help you with questions about Telangana tourism, travel tips, and
+            planning your perfect trip. What would you like to know?
           </p>
         </CardContent>
       </Card>

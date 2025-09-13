@@ -34,6 +34,7 @@ export function Navigation() {
     { name: t("nav.arGuide"), href: "/ar-guide" },
     { name: t("nav.rewards"), href: "/rewards" },
     { name: t("nav.safety"), href: "/safety" },
+    { name: t("nav.chat"), href: "/chat" }, // Added chat navigation item
     { name: t("nav.settings"), href: "/settings" },
   ]
 

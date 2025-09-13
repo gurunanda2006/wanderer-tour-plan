@@ -21,6 +21,7 @@ const translations = {
     "nav.arGuide": "AR Guide",
     "nav.rewards": "Rewards",
     "nav.safety": "Safety",
+    "nav.chat": "AI Chat", // Added chat navigation translation
     "nav.settings": "Settings",
 
     // Hero Section
@@ -122,6 +123,7 @@ const translations = {
     "nav.arGuide": "AR గైడ్",
     "nav.rewards": "రివార్డ్స్",
     "nav.safety": "భద్రత",
+    "nav.chat": "AI చాట్", // Added Telugu translation for chat
     "nav.settings": "సెట్టింగ్స్",
 
     // Hero Section
@@ -223,6 +225,7 @@ const translations = {
     "nav.arGuide": "AR गाइड",
     "nav.rewards": "रिवार्ड्स",
     "nav.safety": "सुरक्षा",
+    "nav.chat": "AI चैट", // Added Hindi translation for chat
     "nav.settings": "सेटिंग्स",
 
     // Hero Section

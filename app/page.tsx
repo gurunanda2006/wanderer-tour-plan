@@ -36,7 +36,7 @@ export default function HomePage() {
       icon: MessageCircle,
       title: "AI Chat Assistant",
       description: "Get instant answers about tourism and travel planning",
-      href: "/plan-trip",
+      href: "/chat", // Updated href to point to new chat page
     },
     {
       icon: Settings,
@@ -80,7 +80,7 @@ export default function HomePage() {
       {/* Features Section */}
       <section className="relative py-8 px-2 bg-card overflow-hidden transition-all duration-500 hover:bg-card/80 group">
         <WeaveBackground />
-        <div className="container mx-auto max-w-6xl relative z-10">
+        <div className="container mx-auto max-w-6xl relative z-10 opacity-90">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance group-hover:text-primary transition-colors duration-300">
               Everything You Need for the Perfect Trip
@@ -148,7 +148,7 @@ export default function HomePage() {
                     className="object-cover group-hover/card:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover/card:from-black/90 group-hover/card:via-black/40 transition-all duration-300" />
-                  <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-2 group-hover/card:bg-black/80 transition-colors duration-300">
+                  <div className="absolute bottom-4 left-4 backdrop-blur-sm rounded-lg px-3 py-2 group-hover/card:bg-black/80 transition-colors duration-300 bg-transparent opacity-60">
                     <h3 className="font-bold text-lg text-white">{destination.name}</h3>
                     <p className="text-sm text-gray-200">{destination.location}</p>
                   </div>
@@ -166,13 +166,13 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-8 px-2 hero-gradient overflow-hidden transition-all duration-500 hover:brightness-90 group">
+      <section className="relative py-8 px-2 hero-gradient overflow-hidden transition-all duration-500 hover:brightness-90 group font-serif">
         <WeaveBackground />
         <div className="container mx-auto max-w-4xl text-center text-white relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance group-hover:drop-shadow-lg transition-all duration-300">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance group-hover:drop-shadow-lg transition-all duration-300 opacity-90">
             Ready to Start Your Adventure?
           </h2>
-          <p className="text-xl mb-8 text-gray-200 text-pretty group-hover:text-white transition-colors duration-300">
+          <p className="text-xl mb-8 text-gray-200 text-pretty group-hover:text-white transition-colors duration-300 opacity-50">
             Join thousands of travelers who have discovered the magic of Telangana with Wanderer
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
